@@ -5,6 +5,7 @@ public class MyLinkedList{
    // I have no clue what to write for this constructor
  }
  public int size();
+
  public boolean add(String value){
    new Node temp = new Node(value);
    temp.setPrev(end);
@@ -13,7 +14,13 @@ public class MyLinkedList{
    return true;
  }
  public void add(int index, String value);
- public String get(int index);
+ public String get(int index){
+   new Node temp = start
+   for (int i = 0;i<index-1;i++){
+     temp = temp.next();
+   }
+   return temp.getData();
+ }
  public String set(int index, String value);
  public String toString();
  //Any helper method that returns a Node object MUST BE PRIVATE!
