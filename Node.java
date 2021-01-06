@@ -5,6 +5,18 @@ public class Node{
  public Node(String value){
    data = value;
  }
+
+ public String getData(){
+   return data;
+ }
+
+ public Node getNext(){
+   return next;
+ }
+
+ public Node getPrev(){
+   return prev;
+ }
+
  
- //write get/set methods for all three instance variables.
 }
