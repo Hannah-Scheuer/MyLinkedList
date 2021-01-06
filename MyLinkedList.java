@@ -14,14 +14,25 @@ public class MyLinkedList{
    return true;
  }
  public void add(int index, String value);
+
  public String get(int index){
-   new Node temp = start
+   new Node temp = start;
    for (int i = 0;i<index-1;i++){
      temp = temp.next();
    }
    return temp.getData();
  }
+
  public String set(int index, String value);
- public String toString();
+
+ public String toString(){
+   String out = "[";
+   new Node temp = start;
+   for (int i = 0;i<size-1;i++){
+     out += temp.getData() + ", "
+     temp = temp.next();
+   }
+   return out + end.getData()+ "]";
+ }
  //Any helper method that returns a Node object MUST BE PRIVATE!
 }
