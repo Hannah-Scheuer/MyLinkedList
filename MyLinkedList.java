@@ -2,7 +2,7 @@ public class MyLinkedList{
  private int size;
  private Node start,end;
  public MyLinkedList(){
-   // I have no clue what to write for this constructor
+   size = 0;
  }
  public int size(){
    return size;
@@ -16,7 +16,17 @@ public class MyLinkedList{
    size += 1;
    return true;
  }
- public void add(int index, String value);
+ public void add(int index, String value){
+   new Node temp = start;
+   for (int i = 0;i<index-1;i++){
+     temp = temp.next();
+   }
+   new Node newNode = new Node(value);
+   newNode.setPrev(temp.getPrev);
+   newNode.setNex(temp.getNext);
+   newNode.getPrev().setNext(newNode);
+   newNode.getNext().setPrev(newNode);
+ }
 
  public String get(int index){
    new Node temp = start;
@@ -26,7 +36,15 @@ public class MyLinkedList{
    return temp.getData();
  }
 
- public String set(int index, String value);
+ public String set(int index, String value){
+   new Node temp = start;
+   for (int i = 0;i<index-1;i++){
+     temp = temp.next();
+   }
+   String out = temp.getData();
+   temp.setData(value);
+   return out;
+ }
 
  public String toString(){
    String out = "[";
@@ -37,5 +55,8 @@ public class MyLinkedList{
    }
    return out + end.getData()+ "]";
  }
+
+ public String remove(int index);
+ public void extend(MyLinkedList other);
  //Any helper method that returns a Node object MUST BE PRIVATE!
 }
