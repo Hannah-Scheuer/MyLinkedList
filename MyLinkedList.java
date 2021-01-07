@@ -26,6 +26,7 @@ public class MyLinkedList{
    newNode.setNex(temp.getNext);
    newNode.getPrev().setNext(newNode);
    newNode.getNext().setPrev(newNode);
+   size += 1;
  }
 
  public String get(int index){
@@ -56,7 +57,19 @@ public class MyLinkedList{
    return out + end.getData()+ "]";
  }
 
- public String remove(int index);
+ public String remove(int index){
+   new Node temp = start;
+   for (int i = 0;i<index-1;i++){
+     temp = temp.next();
+   }
+   String out = temp.getData();
+   temp.getPrev().setNext(temp.getNext());
+   temp.getNext().setPrev(temp.getPrev());
+   size = size -1;
+   return out;
+ }
+
+
  public void extend(MyLinkedList other);
  //Any helper method that returns a Node object MUST BE PRIVATE!
 }
