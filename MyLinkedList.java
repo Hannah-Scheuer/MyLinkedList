@@ -1,29 +1,37 @@
 public class MyLinkedList{
  private int size;
- private Node start,end;
+ private Node start, end;
  public MyLinkedList(){
    size = 0;
+   start = new Node("");
+   end = start;
  }
  public int size(){
    return size;
  }
 
  public boolean add(String value){
+   if (size==0){
+     start = start.setData(value);
+     end = end.setData(value);
+   }
+   else{
    Node temp = new Node(value);
    temp.setPrev(end);
    temp.setNext(null);
    end.setNext(temp);
+  }
    size += 1;
    return true;
  }
  public void add(int index, String value){
    Node temp = start;
    for (int i = 0;i<index-1;i++){
-     temp = temp.next();
+     temp = temp.getNext();
    }
    Node newNode = new Node(value);
    newNode.setPrev(temp.getPrev());
-   newNode.setNex(temp.getNext());
+   newNode.setNext(temp.getNext());
    newNode.getPrev().setNext(newNode);
    newNode.getNext().setPrev(newNode);
    size += 1;
@@ -69,11 +77,12 @@ public class MyLinkedList{
    return out;
  }
 
-
+/*
  public void extend(MyLinkedList other){
    end.setNext(other.get(0));
    other.get(0).setPrev(get(size-1));
    size += other.size();
  }
+ */
  //Any helper method that returns a Node object MUST BE PRIVATE!
 }
