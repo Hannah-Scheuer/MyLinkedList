@@ -31,22 +31,25 @@ public class MyLinkedList{
      throw new IndexOutOfBoundsException("Index " + index + " is not in range");
    }
    Node newNode = new Node(value);
+   Node temp = new Node(value);
    if (size==0){
      start = newNode;
      end = newNode;
    }
    else if (index == size){
-     end.setNext(newNode);
-     newNode.setPrev(end);
+     temp = end;
+     temp.setNext(newNode);
+     newNode.setPrev(temp);
      end = newNode;
    }
    else if (index == 0) {
-     start.setPrev(newNode);
-     newNode.setNext(start);
+     temp = start;
+     temp.setPrev(newNode);
+     newNode.setNext(temp);
      start = newNode;
    }
    else{
-     Node temp = start;
+     temp = start;
      for (int i = 0;i<index-1;i++){
        temp = temp.getNext();
      }
@@ -74,7 +77,7 @@ public class MyLinkedList{
      throw new IndexOutOfBoundsException("Index " + index + " is not in range");
    }
    Node temp = start;
-   for (int i = 0;i<index-1;i++){
+   for (int i = 0;i<index;i++){
      temp = temp.getNext();
    }
    String out = temp.getData();
