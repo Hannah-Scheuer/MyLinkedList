@@ -11,15 +11,18 @@ public class MyLinkedList{
  }
 
  public boolean add(String value){
+   Node temp = new Node(value);
    if (size==0){
-     start = start.setData(value);
-     end = end.setData(value);
+     start = temp;
+     end = temp;
+     //start = start.setData(value);
+     //end = end.setData(value);
    }
    else{
-   Node temp = new Node(value);
-   temp.setPrev(end);
-   temp.setNext(null);
-   end.setNext(temp);
+   Node temp1 = end;
+   end = temp;
+   end.setPrev(temp1);
+   temp1.setNext(end);
   }
    size += 1;
    return true;
