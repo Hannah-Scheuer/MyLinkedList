@@ -74,8 +74,29 @@ public class MyLinkedList{
  public String remove(int index){
    Node temp = findNode(index);
    String out = temp.getData();
-   temp.getPrev().setNext(temp.getNext());
-   temp.getNext().setPrev(temp.getPrev());
+   if (size == 1){
+     out = start.getData();
+     start = null;
+     end = null;
+   }
+   else if (index == 0){
+     out = start.getData();
+     temp = start.getNext();
+     temp.setPrev(null);
+     start.setNext(null);
+     start = temp;
+   }
+   else if (index == size()-1){
+     out = end.getData();
+     temp = end.getPrev();
+     temp.setNext(null);
+     end.setPrev(null);
+     end = temp;
+   }
+   else{
+     temp.getPrev().setNext(temp.getNext());
+     temp.getNext().setPrev(temp.getPrev());
+   }
    size = size -1;
    return out;
  }
