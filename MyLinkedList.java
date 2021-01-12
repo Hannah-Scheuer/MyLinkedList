@@ -39,11 +39,12 @@ public class MyLinkedList{
      temp.setPrev(start);
    }
    else{
-     temp = findNode(index);
-     newNode.setPrev(temp.getPrev());
-     newNode.setNext(temp.getNext());
-     temp.getPrev().setNext(newNode);
-     temp.getNext().setPrev(newNode);
+     Node newPrev = findNode(index - 1);
+     Node newNext = findNode(index);
+     newNode.setPrev(newPrev);
+     newNode.setNext(newNext);
+     newPrev.setNext(newNode);
+     newNext.setPrev(newNode);
     }
     size += 1;
  }
@@ -63,11 +64,11 @@ public class MyLinkedList{
  public String toString(){
    String out = "[";
    Node temp = start;
-   for (int i = 0;i<size()-1;i++){
+   while (temp.getNext() != null){
      out += temp.getData() + ", ";
      temp = temp.getNext();
    }
-   return out + end.getData()+ "]";
+   return out + end.getData()+"]";
  }
 
  public String remove(int index){
@@ -79,7 +80,7 @@ public class MyLinkedList{
    return out;
  }
 
- public Node findNode(int index){
+ private Node findNode(int index){
    if (index < 0 || index >= size){
      throw new IndexOutOfBoundsException("Index " + index + " is not in range");
    }
