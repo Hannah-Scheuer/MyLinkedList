@@ -11,18 +11,7 @@ public class MyLinkedList{
  }
 
  public boolean add(String value){
-   Node temp = new Node(value);
-   if (size==0){
-     start = temp;
-     end = temp;
-   }
-   else{
-     Node temp1 = end;
-     end = temp;
-     end.setPrev(temp1);
-     temp1.setNext(end);
-  }
-   size += 1;
+   add(size(), value);
    return true;
  }
 
@@ -31,7 +20,7 @@ public class MyLinkedList{
      throw new IndexOutOfBoundsException("Index " + index + " is not in range");
    }
    Node newNode = new Node(value);
-   Node temp = new Node(value);
+   Node temp = new Node(null);
    if (size==0){
      start = newNode;
      end = newNode;
@@ -44,42 +33,28 @@ public class MyLinkedList{
    }
    else if (index == 0) {
      temp = start;
-     temp.setPrev(newNode);
+     //temp.setPrev(newNode);
      newNode.setNext(temp);
      start = newNode;
+     temp.setPrev(start);
    }
    else{
-     temp = start;
-     for (int i = 0;i<index-1;i++){
-       temp = temp.getNext();
-     }
+     temp = findNode(index);
      newNode.setPrev(temp.getPrev());
      newNode.setNext(temp.getNext());
      temp.getPrev().setNext(newNode);
      temp.getNext().setPrev(newNode);
-     size += 1;
     }
+    size += 1;
  }
 
  public String get(int index){
-   if (index < 0 || index >= size){
-     throw new IndexOutOfBoundsException("Index " + index + " is not in range");
-   }
-   Node temp = start;
-   for (int i = 0;i<index-1;i++){
-     temp = temp.getNext();
-   }
+   Node temp = findNode(index);
    return temp.getData();
  }
 
  public String set(int index, String value){
-   if (index < 0 || index >= size){
-     throw new IndexOutOfBoundsException("Index " + index + " is not in range");
-   }
-   Node temp = start;
-   for (int i = 0;i<index;i++){
-     temp = temp.getNext();
-   }
+   Node temp = findNode(index);
    String out = temp.getData();
    temp.setData(value);
    return out;
@@ -96,18 +71,23 @@ public class MyLinkedList{
  }
 
  public String remove(int index){
-   if (index < 0 || index >= size){
-    throw new IndexOutOfBoundsException("Index " + index + " is not in range");
-   }
-   Node temp = start;
-   for (int i = 0;i<index-1;i++){
-     temp = temp.getNext();
-   }
+   Node temp = findNode(index);
    String out = temp.getData();
    temp.getPrev().setNext(temp.getNext());
    temp.getNext().setPrev(temp.getPrev());
    size = size -1;
    return out;
+ }
+
+ public Node findNode(int index){
+   if (index < 0 || index >= size){
+     throw new IndexOutOfBoundsException("Index " + index + " is not in range");
+   }
+   Node temp = start;
+   for (int i = 0;i<index;i++){
+     temp = temp.getNext();
+   }
+   return temp;
  }
 
 /*
