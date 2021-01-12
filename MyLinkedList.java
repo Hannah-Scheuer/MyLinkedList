@@ -33,7 +33,6 @@ public class MyLinkedList{
    }
    else if (index == 0) {
      temp = start;
-     //temp.setPrev(newNode);
      newNode.setNext(temp);
      start = newNode;
      temp.setPrev(start);
@@ -122,19 +121,26 @@ public class MyLinkedList{
    }
    return temp;
  }
-
-
+ 
  public void extend(MyLinkedList other){
    if (size()==0){
      start = other.start;
      end = other.end;
      size = other.size;
+     other.start = null;
+     other.end = null;
      other.size = 0;
    }
-   else if (other.size()!=0){
+   else if (other.size() ==0){
+     return;
+   }
+   else{
      end.setNext(other.start);
      other.start.setPrev(end);
+     end = other.end;
      size += other.size();
+     other.start = null;
+     other.end = null;
      other.size = 0;
   }
  }
